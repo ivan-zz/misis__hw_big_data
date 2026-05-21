@@ -1,8 +1,25 @@
-## sbt project compiled with Scala 3
+```markdown
+# Цветовой круг HSV (Scala 3)
 
-### Usage
+**Источник задачи:** [Rosetta Code - Color Wheel](https://rosettacode.org/wiki/Color_wheel)
 
-This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL.
+## Описание задачи
+Цель этого проекта — процедурно сгенерировать цветовой круг HSV с нуля. Алгоритм проецирует координаты X/Y на круг: вычисляет расстояние от центра (чтобы задать насыщенность и границы круга) и полярный угол с помощью функции `atan2` (чтобы определить оттенок). Затем вычисленные значения HSV конвертируются в RGB, и на выходе получается текстовый файл изображения в формате `.ppm` (Portable Pixmap).
 
-For more information on the sbt-dotty plugin, see the
-[scala3-example-project](https://github.com/scala/scala3-example-project/blob/main/README.md).
+## Тестирование
+Основная математическая логика покрыта тестами с использованием фреймворка **ScalaTest** (`AnyFunSuite`). 
+
+Вместо того чтобы тестировать операции ввода-вывода файлов, тесты проверяют детерминированную функцию преобразования `hsvToRgb`, опираясь на известные граничные условия. Например:
+* Убеждаемся, что оттенок в `0°` корректно преобразуется в чистый красный цвет `(255, 0, 0)`.
+* Убеждаемся, что оттенок в `120°` корректно преобразуется в чистый зеленый цвет `(0, 255, 0)`.
+
+**Запуск тестов:**
+```bash
+sbt test
+```
+
+**Генерация изображения:**
+
+```bash
+sbt run
+```
